@@ -11,6 +11,10 @@ setup: ## Upgrade the pip and then install poetry
 deploy: ## deploys backend at port 8000
 	uvicorn backend.app:app --reload
 
+.PHONY: docker-build
+docker-build: ## build docker image
+	docker build . -t "backend:$$(poetry version -s)"
+
 .PHONY: docker-deploy
 docker-deploy: ## deploy from docker image
 	docker run --rm -p 8000:8000 backend:0.1.0 uvicorn app:app --host 0.0.0.0 --reload
