@@ -8,5 +8,5 @@ COPY ./poetry.lock poetry.lock
 RUN pip install poetry
 RUN poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi --no-dev
-
-COPY ./backend /app
+RUN rm -rf /app
+CMD uvicorn app:app --host 0.0.0.0 --reload
